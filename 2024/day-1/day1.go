@@ -89,6 +89,10 @@ func calculTotalDistance(sortedCol1, sortedCol2 []int) int {
 }
 
 func calculSimilarities(sortedCol1, sortedCol2 []int) int {
+	// there is also a different way to do it, maybe more optimized
+	// what if in ur first list you take all occurences, mlitple by occurence of the second list
+	// but you have to remove after you find it 
+	// it's maybe not necessary to go though that list if it's ordered, smth with a binary search might exist
 	similarities := 0
 	for i := 0; i < len(sortedCol1) && i < len(sortedCol2); i++ {
 		occurence := countOccurrences(sortedCol2, sortedCol1[i])
