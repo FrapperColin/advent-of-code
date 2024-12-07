@@ -159,7 +159,6 @@ func fixSequenceWithTopologicalSort(sequence []int, rules map[int][]int) *([]int
 func buildSubGraph(sequence []int, rules map[int][]int) (map[int][]int, map[int]int) {
 	graph := make(map[int][]int)
 	inDegree := make(map[int]int)
-	fmt.Printf("rules : %v\n", rules)
 
 	// Count the occurrences of each number in the sequence
 	occurrences := make(map[int]int)
@@ -167,7 +166,6 @@ func buildSubGraph(sequence []int, rules map[int][]int) (map[int][]int, map[int]
 		occurrences[num]++
 	}
 
-	fmt.Printf("occurrences : %v\n", occurrences)
 
 	// Initialize in-degree for every number in the sequence
 	for num := range occurrences {
