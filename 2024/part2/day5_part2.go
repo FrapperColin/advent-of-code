@@ -105,9 +105,6 @@ func fixSequenceWithTopologicalSort(sequence []int, rules map[int][]int) *([]int
 	// Create the graph BASED ON SEQUENCE
 	graph, inDegree := buildSubGraph(sequence, rules)
 
-	fmt.Printf("graph: %v\n", graph)
-	fmt.Printf("degree: %v\n", inDegree)
-
 	// Perform Kahn's algorithm for topological sort
 	// Attempt to find an initial node even if no degree == 0 exists
 	// Queue to store nodes with in-degree 0
@@ -130,8 +127,6 @@ func fixSequenceWithTopologicalSort(sequence []int, rules map[int][]int) *([]int
 
 	// Process nodes iteratively
 	for len(queue) > 0 {
-		fmt.Printf("queue inside list: %v\n", queue)
-
 		// Pop the first node from the queue
 		current := queue[0]
 		queue = queue[1:]
@@ -141,7 +136,6 @@ func fixSequenceWithTopologicalSort(sequence []int, rules map[int][]int) *([]int
 
 		// Reduce the in-degree of dependent nodes
 		for _, neighbor := range graph[current] {
-			fmt.Printf("decreasing : %v, %v\n", neighbor, inDegree[neighbor])
 			inDegree[neighbor]-- // Decrease degree by 1
 			// If in-degree becomes 0, add to queue
 			if inDegree[neighbor] == 0 {
@@ -151,18 +145,12 @@ func fixSequenceWithTopologicalSort(sequence []int, rules map[int][]int) *([]int
 
 			}
 		}
-
-		fmt.Printf("queue after : %v\n", queue)
-
 	}
 
 	// If we processed all nodes, the sort is valid
 	if len(sorted) == len(sequence) {
-		fmt.Printf("sorted: %v\n", sorted)
-
 		return &sorted
 	}
-	fmt.Printf("sorted: %v\n", sorted)
 
 	return nil // Topological sort failed
 
@@ -186,12 +174,8 @@ func buildSubGraph(sequence []int, rules map[int][]int) (map[int][]int, map[int]
 		inDegree[num] = 0
 	}
 
-	fmt.Printf("inDegree : %v\n", inDegree)
-
 	// Build the graph based on rules and respect repeated dependencies
 	for _, num := range sequence {
-		fmt.Printf("num : %v\n", num)
-		fmt.Printf("rules[num] : %v\n", rules[num])
 
 		if neighbors, exists := rules[num]; exists {
 			// For every dependency repeated, map it correctly
