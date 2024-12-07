@@ -1,3 +1,2 @@
-inputs.txt
-inputs_copy.txt
+inputs/*
 problems.txt
